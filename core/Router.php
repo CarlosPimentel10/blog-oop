@@ -9,6 +9,11 @@ class Router
 
     public function add(string $method, string $uri, string $controller): void
     {
+        $this->routes[] = [
+          'method' => $method,
+          'uri' => $uri,
+          'controller' => $controller  
+        ];
 
     }
 
