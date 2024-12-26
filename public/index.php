@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 use Core\Router;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../bootstrap.php';
 
+var_dump($config);
 // Initialize the Router
 $router = new Router();
 
