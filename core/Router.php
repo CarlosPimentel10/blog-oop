@@ -17,10 +17,10 @@ class Router
 
     }
 
-    public function notFound():void {
+    public function notFound(): string {
         http_response_code(404);
-        echo "404 Not Found";
-        exit;
+        return "404 Not Found";
+        
     }
 
     public function dispatch(string $uri, string $method): string
@@ -61,9 +61,9 @@ class Router
         $params = [];
 
         foreach ($routeSegments as $index => $routeSegment) {
-            if (str_starts_with($routePart, '{') && str_ends_with($routePart, '}') {
-                $params[trim($routePart, '{}')] = $requestSegments[$index];
-            } elseif($routeSegment !== $requestSegments[$index]) {
+            if (str_starts_with($routeSegment, '{') && str_ends_with($routeSegment, '}')) {
+                $params[trim($routeSegment, '{}')] = $requestSegments[$index];
+            } elseif ($routeSegment !== $requestSegments[$index]) {
                 return null;
             }
         }
