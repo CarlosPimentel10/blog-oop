@@ -17,9 +17,24 @@ class Router
 
     }
 
+    public function notFound():void {
+        http_response_code(404);
+        echo "404 Not Found";
+        exit;
+    }
+
     public function dispatch(string $uri, string $method): string
     {
+        $route = $this->findRoute($uri, $method);
 
+        if (!$route) {
+            return $this->notFound();
+        }
+        // PostController@index
+        // PostController@show
+        [$controller, $action] = explode('@', $route['controller']);
+
+        return $this->callAction($controller, $action, $route['params']);
     }
 
     protected function findRoute(string $uri, string $method): ?array
