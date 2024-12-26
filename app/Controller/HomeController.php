@@ -1,9 +1,18 @@
 <?php
 namespace App\Controller;
 
-class HomeController {
-    public function index():string {
-        return "Home";
+use Core\View;
+
+class HomeController
+{
+    public function index(): string
+    {
+        return View::render(
+            template: 'home/index',
+            data: ['message' => 'Hello!'],
+            layout:'layouts/main'
+        );
+
     }
 }
 

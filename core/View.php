@@ -7,7 +7,7 @@ class View
 {
     public static function render(string $template, array $data = [], string $layout = null): string
     {
-        $content = static::render(
+        $content = static::renderTemplate(
             $template,
             $data
         );
@@ -17,7 +17,7 @@ class View
     protected static function renderTemplate(string $template, array $data): string
     {
         extract($data);
-        $path = dirname(__DIR__) . "/../app/Views/$template.php";
+        $path = dirname(__DIR__) . "/app/Views/$template.php";
 
         if (!file_exists($path)) {
             throw new \RuntimeException("Error: Template file not found: $path");
@@ -34,7 +34,7 @@ class View
             return $content;
         }
         extract([...$data, 'content' => $content]);
-        $path = dirname(__DIR__) . "/../app/Views/$template.php";
+        $path = dirname(__DIR__) . "/app/Views/$template.php";
 
         if (!file_exists($path)) {
             throw new \RuntimeException("Error: Layout file not found: $path");
