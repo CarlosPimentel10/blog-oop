@@ -1,0 +1,75 @@
+# Ignore .env file (Environment variables)
+.env
+.env.local
+.env.*
+
+# Ignore vendor directory (if using Composer)
+vendor/
+
+# Ignore Composer lock file (optional, but useful for libraries)
+composer.lock
+
+# Ignore Laravel-specific directories (if applicable)
+storage/
+bootstrap/cache/
+
+# Ignore logs and temporary files
+*.log
+*.cache
+*.tmp
+*.bak
+*.swp
+
+# Ignore PHPUnit test results
+.phpunit.result.cache
+
+# Ignore IDE settings (e.g., VS Code, PHPStorm, Sublime Text)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore Node.js dependencies (if applicable)
+node_modules/
+
+# Ignore build directories (if applicable)
+dist/
+build/
+
+# Ignore compiled assets (optional)
+*.min.*
+*.map
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore backup files
+*.~*
+*.orig
+*.save
+
+# Ignore generated files (optional)
+*.generated.*
+*.compiled.*
+
+# Ignore PHPStorm-specific metadata
+.phpstorm.meta.php
+
+# Ignore user-uploaded files (if applicable)
+uploads/
+public/uploads/
+
+# Ignore temporary or personal files
+*.tmp
+*.log
+*.pid
+*.seed
+*.key
+
+# Ignore specific configurations
+config/*.local.php
+
+# Ignore caches
+cache/
+*.cache
