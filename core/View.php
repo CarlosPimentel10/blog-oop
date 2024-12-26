@@ -1,14 +1,21 @@
 <?php
-declare(strict_types= 1);
+declare(strict_types=1);
 
 namespace Core;
 
-class View {
-    public static function render(string $template, array $data = []):string {
-        
+class View
+{
+    public static function render(string $template, array $data = [], string $layout = null): string
+    {
+        $content = static::render(
+            $template,
+            $data
+        );
+        return static::renderLayout($layout, $data, $content);
     }
 
-    protected static function renderTemplate(string $template, array $data):string {
+    protected static function renderTemplate(string $template, array $data): string
+    {
         extract($data);
         $path = dirname(__DIR__) . "/../app/Views/$template.php";
 
@@ -21,8 +28,12 @@ class View {
         return ob_get_clean();
     }
 
-    protected static function renderLayout(string $template, array $data, string $content):string {
-        extract([...$data, 'content'=>$content]);
+    protected static function renderLayout(?string $template, array $data, string $content): string
+    {
+        if (null === $template) {
+            return $content;
+        }
+        extract([...$data, 'content' => $content]);
         $path = dirname(__DIR__) . "/../app/Views/$template.php";
 
         if (!file_exists($path)) {
