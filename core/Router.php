@@ -19,7 +19,14 @@ class Router
 
     protected function findRoute(string $uri, string $method): ?array
     {
+        foreach ($this-> routes as $route) {
+            $params = $this->matchRoute($route['uri'], $uri);
+            if ($params !== null && $route['method'] === $method) {
+                return [...$route, 'params' => $params];               
+            }
+        }
 
+        return null;
     }
 
     protected function matchRoute(string $routeUri, string $requestUri): ?array
