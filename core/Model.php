@@ -24,7 +24,14 @@ abstract class Model {
         return $result ? static::createFromArray($result):null;
     }
 
-    public static function create(array $data): static{}
+    public static function create(array $data): static{
+        $db = App::get('database');
+        $columns = implode(', ', array_keys($data));
+        $placeholders = implode(', ', array_fill(0, count($data), '?'));
+        $sql = "INSERT INTO " . static::$table . " ($columns) VALUES ($placeholders)";
+        $db->query($sql, array_values($data));
+        return static::find($db->lastInsertId());
+    }
 
     protected static function createFromArray(array $data) : static {
         $model = new static();
