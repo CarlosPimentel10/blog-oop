@@ -10,6 +10,7 @@ $db = App::get('database');
 $schemaFile = __DIR__ . '/../database/schema.sql';
 $sql = file_get_contents($schemaFile);
 
+
 try {
     $parts = array_filter(
         explode(separator: ';', string: $sql)
@@ -19,10 +20,11 @@ try {
     foreach ($parts as $sqlPart) {
         $db->query($sqlPart);
     }
-    echo "Schema loaded successfully\n"
+    echo "Schema loaded successfully\n";
 } catch (Exception $e) {
     echo "Error loading schema: " . $e->getMessage() . "\n";
 }
+// throw new Exception('Testing exception handling');
 
 
 ?>
