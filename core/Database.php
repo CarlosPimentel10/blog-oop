@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-//namespace Core;
+namespace Core;
 
 class Database
 {
-    protected $pdo;
+    protected \PDO $pdo;
 
     public function __construct(array $config)
     {
@@ -14,10 +14,10 @@ class Database
             $username = $config['username'] ?? null;
             $password = $config['password'] ?? null;
             $options = $config['options'] ?? null;
-            $this->pdo = new PDO($dsn, $username, $password, $options);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            throw new Exception("Could not connect to the database");
+            $this->pdo = new \PDO($dsn, $username, $password, $options);
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+            throw new \Exception("Could not connect to the database");
         }
     }
 
@@ -28,22 +28,22 @@ class Database
 
         return match ($driver) {
             'sqlite' => "sqlite:$dbName",
-            default => throw new Exception("Unsupported database driver: $driver")
+            default => throw new \Exception("Unsupported database driver: $driver")
         };
     }
 
-    public function query(string $sql, array $params = []):PDOStatement {
+    public function query(string $sql, array $params = []):\PDOStatement {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         return $stmt;
     }
 
     public function fetchAll(string $sql, array $params = []):array {
-        return $this->query($sql,$params)->fetchAll(PDO::FETCH_OBJ);
+        return $this->query($sql,$params)->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function fetch(string $sql,array $params = []): object|false {
-        return $this->query($sql, $params)->fetch(PDO::FETCH_OBJ);
+        return $this->query($sql, $params)->fetch(\PDO::FETCH_OBJ);
     }
 
     public function lastInsertId(): string|false {
